@@ -1,3 +1,12 @@
+import java.io.FileInputStream
+import java.util.Properties
+
+var localProperties = Properties();
+var localPropertiesFile = rootProject.file("local.properties")
+if (localPropertiesFile.exists()) {
+    localProperties.load(FileInputStream(localPropertiesFile))
+}
+
 plugins {
     alias(libs.plugins.android.application)
 }
@@ -21,6 +30,10 @@ android {
     }
 
     buildTypes {
+        debug {
+            val apiKey = localProperties.getProperty("NEWS_API_KEY") ?: ""
+            buildConfigField("String", "NEWS_API_KEY", "\"$apiKey\"")
+        }
         release {
             isMinifyEnabled = false
             proguardFiles(
@@ -28,6 +41,10 @@ android {
                 "proguard-rules.pro"
             )
         }
+    }
+
+    buildFeatures {
+        buildConfig = true
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
