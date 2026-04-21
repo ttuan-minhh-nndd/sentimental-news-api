@@ -20,9 +20,31 @@ public class SentimentAnalyzer {
 
     // this function is called from Adapter or PagingSource
     public float classifyText(String text) {
-        if (classifier == null) {
-            return classifier.classify(text).get(0).getScore();
+        float[] scores = analyze(text);
+
+        // Assuming index 1 is the "Positive" label in the tflite model
+        if (scores.length > 1) {
+            return scores[1];
         }
         return 0.0f;
+    }
+
+    public float[] analyze(String textToAnalyze) {
+        // 1. Check if the classifier was loaded successfully
+        if (classifier == null) {
+            return new float[]{0.5f, 0.5f}; // return neutral/zero scores if model failed
+        }
+
+        // 2. Run the model on the input text
+        // This returns a list of categories (0 - negative, 1 - positive)
+        var results = classifier.classify(textToAnalyze);
+
+        // 3. Convert the results into a float array
+        float[] scores = new float[results.size()];
+        for (int i = 0; i < results.size(); i++) {
+            scores[i] = results.get(i).getScore();
+        }
+
+        return scores;
     }
 }

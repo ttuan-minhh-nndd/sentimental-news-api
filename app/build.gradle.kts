@@ -31,8 +31,7 @@ android {
 
     buildTypes {
         debug {
-            val apiKey = localProperties.getProperty("NEWS_API_KEY") ?: ""
-            buildConfigField("String", "NEWS_API_KEY", "\"$apiKey\"")
+            buildConfigField("String", "NEWS_API_KEY", "\"${localProperties.getProperty("NEWS_API_KEY")}\"")
         }
         release {
             isMinifyEnabled = false
@@ -69,6 +68,7 @@ dependencies {
     implementation(libs.material)
     implementation(libs.activity)
     implementation(libs.constraintlayout)
+    implementation(libs.paging.rxjava3)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
