@@ -63,6 +63,8 @@ dependencies {
     implementation("org.tensorflow:tensorflow-lite-task-text:0.4.4")
     // 4. Image Loading: Coil (Hỗ trợ load hình ảnh bài báo)
     implementation("io.coil-kt:coil:2.5.0")
+    // 5. Glide for handling asynchronous loading and memory management
+    implementation("com.github.bumptech.glide:glide:4.12.0")
 
     implementation(libs.appcompat)
     implementation(libs.material)
