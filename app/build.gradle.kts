@@ -55,6 +55,7 @@ dependencies {
     // 1. Networking: Retrofit & GSON
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation("com.squareup.retrofit2:adapter-rxjava3:2.9.0")
     implementation("com.google.code.gson:gson:2.8.7")
     // 2. Paging Library (Xử lý phân trang dữ liệu lớn)
     // Mặc dù lab dùng -ktx cho Kotlin, nhưng Java vẫn sử dụng tốt bản này
